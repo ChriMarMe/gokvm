@@ -76,6 +76,9 @@ const (
 	kvmSetTSCKHz = 0xA2
 	kvmGetTSCKHz = 0xA3
 
+	kvmGetXSave = 0xA4
+	kvmSetXSave = 0xA5
+
 	kvmGetXCRS = 0xA6
 	kvmSetXCRS = 0xA7
 
@@ -83,6 +86,8 @@ const (
 
 	kvmGetSRegs2 = 0xCC
 	kvmSetSRegs2 = 0xCD
+
+	kvmGetXSave2 = 0xCF
 
 	kvmCreateDev = 0xE0
 )

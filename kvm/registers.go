@@ -197,3 +197,34 @@ func SetSRegs2(vcpuFd uintptr, sreg *SRegs2) error {
 
 	return err
 }
+
+type XSave struct {
+	Region [1024]uint32
+	Extra  []uint32
+}
+
+// SetXSave sets the vcpus XSave struct
+func SetXSave(vcpuFd uintptr, xsave *XSave) error {
+	_, err := Ioctl(vcpuFd,
+		IIOW(kvmSetXSave, unsafe.Sizeof(XSave{})),
+		uintptr(unsafe.Pointer(xsave)))
+	return err
+}
+
+// GetXSave retrieves the XSave struct from vcpu
+func GetXSave(vcpuFd uintptr, xsave *XSave) error {
+	_, err := Ioctl(vcpuFd,
+		IIOR(kvmGetXSave, unsafe.Sizeof(XSave{})),
+		uintptr(unsafe.Pointer(xsave)))
+
+	return err
+}
+
+// GetXSave2 retrieves the XSave struct from vcpu if XSave2 capability is supported.
+func GetXSave2(vcpufd uintptr, xsave *XSave) error {
+	_, err := Ioctl(vcpufd,
+		IIOR(kvmGetXSave2, unsafe.Sizeof(XSave{})),
+		uintptr(unsafe.Pointer(xsave)))
+
+	return err
+}
